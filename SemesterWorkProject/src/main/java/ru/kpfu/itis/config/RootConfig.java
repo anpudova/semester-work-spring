@@ -17,12 +17,12 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("ru.kpfu.itis.repository")
+@ComponentScan("ru.kpfu.itis.repository.db")
 @EnableTransactionManagement
 @PropertySource("classpath:/application.properties")
 public class RootConfig {
 
-    private static final String ENTITIES_PACKAGE = "ru.kpfu.itis.model";
+    private static final String ENTITIES_PACKAGE = "ru.kpfu.itis.model.entity.db";
 
     @Resource
     private Environment env;

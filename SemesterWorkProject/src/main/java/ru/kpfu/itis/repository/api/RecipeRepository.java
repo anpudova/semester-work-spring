@@ -9,7 +9,7 @@ import ru.kpfu.itis.model.response.RecipeResponse;
 import ru.kpfu.itis.network.RecipeApiService;
 
 import java.io.IOException;
-
+/*
 public class RecipeRepository{
 
     private final RecipeApiService remoteSource;
@@ -57,4 +57,4 @@ public class RecipeRepository{
             throw new IOException(e);
         }
     }
-}
+} */
