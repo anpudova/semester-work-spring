@@ -1,60 +1,81 @@
 package ru.kpfu.itis.repository.api;
 
+import ru.kpfu.itis.exception.EntityNotFoundException;
+import ru.kpfu.itis.exception.NetworkErrorException;
+import ru.kpfu.itis.mapper.api.DetailRecipeResponseMapper;
+import ru.kpfu.itis.mapper.api.InformationResponseMapper;
+import ru.kpfu.itis.mapper.api.IngredientResponseMapper;
+import ru.kpfu.itis.mapper.api.RecipeResponseMapper;
 import ru.kpfu.itis.model.entity.api.DetailRecipeEntity;
+import ru.kpfu.itis.model.entity.api.InformationEntity;
 import ru.kpfu.itis.model.entity.api.IngredientEntity;
 import ru.kpfu.itis.model.entity.api.RecipeEntity;
 import ru.kpfu.itis.model.response.DetailRecipeResponse;
+import ru.kpfu.itis.model.response.InformationResponse;
 import ru.kpfu.itis.model.response.IngredientResponse;
 import ru.kpfu.itis.model.response.RecipeResponse;
 import ru.kpfu.itis.network.RecipeApiService;
+import ru.kpfu.itis.network.RecipeApiServiceManager;
 
 import java.io.IOException;
-/*
+
 public class RecipeRepository{
 
-    private final RecipeApiService remoteSource;
-    private final Object localSource;
-    private final RecipeResponseMapper recipeResponseMapper;
-    private final IngredientResponseMapper ingredientResponseMapper;
-    private final DetailRecipeResponseMapper detailRecipeResponseMapper;
+    private final RecipeApiService source;
 
-    public RecipeRepository(
-            RecipeApiService remoteSource,
-            Object localSource,
-            RecipeResponseMapper recipeResponseMapper,
-            IngredientResponseMapper ingredientResponseMapper,
-            DetailRecipeResponseMapper detailRecipeResponseMapper) {
-        this.remoteSource = remoteSource;
-        this.localSource = localSource;
-        this.recipeResponseMapper = recipeResponseMapper;
-        this.ingredientResponseMapper = ingredientResponseMapper;
-        this.detailRecipeResponseMapper = detailRecipeResponseMapper;
+    public RecipeRepository() {
+        this.source = RecipeApiServiceManager.getInstance();
     }
 
-    public RecipeEntity getRecipesByName(String recipe) throws IOException {
+    public RecipeEntity getRecipesByName(String recipe) {
+        RecipeResponse response;
         try {
-            RecipeResponse response = remoteSource.getRecipeByName(recipe).execute().body();
-            return recipeResponseMapper.map(response);
-        } catch (Exception e) {
-            throw new IOException(e);
+            response = source.getRecipeByName(recipe).execute().body();
+        } catch (IOException e) {
+            throw new NetworkErrorException();
         }
+        if (response == null) {
+            throw new EntityNotFoundException("Couldn't find the recipe.");
+        }
+        return RecipeResponseMapper.map(response);
     }
 
-    public IngredientEntity getIngredientsById(long id) throws IOException {
+    public IngredientEntity getIngredientsById(long id){
+        IngredientResponse response;
         try {
-            IngredientResponse response = remoteSource.getIngredientsById(id).execute().body();
-            return ingredientResponseMapper.map(response);
-        } catch (Exception e) {
-            throw new IOException(e);
+            response = source.getIngredientsById(id).execute().body();
+        } catch (IOException e) {
+            throw new NetworkErrorException();
         }
+        if (response == null) {
+            throw new EntityNotFoundException("Couldn't find the recipe.");
+        }
+        return IngredientResponseMapper.map(response);
     }
 
-    public DetailRecipeEntity getDetailRecipeById(long id) throws IOException {
+    public DetailRecipeEntity getDetailRecipeById(long id){
+        DetailRecipeResponse response;
         try {
-            DetailRecipeResponse response = remoteSource.getDetailRecipeById(id).execute().body();
-            return detailRecipeResponseMapper.map(response);
-        } catch (Exception e) {
-            throw new IOException(e);
+            response = source.getDetailRecipeById(id).execute().body();
+        } catch (IOException e) {
+            throw new NetworkErrorException();
         }
+        if (response == null) {
+            throw new EntityNotFoundException("Couldn't find the recipe.");
+        }
+        return DetailRecipeResponseMapper.map(response);
     }
-} */
+
+    public InformationEntity getInformationById(long id){
+        InformationResponse response;
+        try {
+            response = source.getInformationById(id).execute().body();
+        } catch (IOException e) {
+            throw new NetworkErrorException();
+        }
+        if (response == null) {
+            throw new EntityNotFoundException("Couldn't find the recipe.");
+        }
+        return InformationResponseMapper.map(response);
+    }
+}

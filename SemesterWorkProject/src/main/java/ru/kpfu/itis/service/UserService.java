@@ -1,60 +1,62 @@
 package ru.kpfu.itis.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import ru.kpfu.itis.mapper.db.UserMapper;
+import ru.kpfu.itis.model.dto.UserAdminDto;
+import ru.kpfu.itis.model.form.SignUpForm;
+import ru.kpfu.itis.exception.DuplicateUsernameException;
+import ru.kpfu.itis.model.entity.db.State;
 import ru.kpfu.itis.model.entity.db.UserEntity;
-import ru.kpfu.itis.repository.db.UserRepository;
+import ru.kpfu.itis.repository.db.jpa.UserRepository;
 
-import java.util.Collections;
+import java.util.List;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService {
 
     @Autowired
     private UserRepository userRepo;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String registerUser(UserEntity user) {
-        if (userRepo.existUser(user.getUsername())) {
-            return "User with this username already exist.";
+    public UserAdminDto registerUser(SignUpForm form) {
+        if (userRepo.existUser(form.getUsername())) {
+            throw new DuplicateUsernameException();
         }
-        user.setRole(userRepo.findByRole("ROLE_USER"));
-        //user.setPassword(passwordEncoder.encode(user.getPassword()));
+        UserEntity user = UserEntity.builder()
+                .username(form.getUsername())
+                .password(passwordEncoder.encode(form.getPassword()))
+                .role(userRepo.findByRole("ROLE_USER"))
+                .state(State.ACTIVE)
+                .build();
         userRepo.saveUser(user);
-        return "Success";
+        return UserMapper.mapUserForAdmin(user);
     }
 
-    public String loginUser(UserEntity user) {
-        if (userRepo.findUser(user.getUsername(), user.getPassword()) != null) {
-            return "Success";
+    public void updateUsername(String newUsername, String oldUsername) {
+        if (!userRepo.existUser(newUsername) && !newUsername.equals(oldUsername)) {
+            userRepo.updateUser(newUsername, oldUsername);
+        } else if (userRepo.existUser(newUsername) && !newUsername.equals(oldUsername)) {
+            throw new DuplicateUsernameException();
         }
-        return "Data entered incorrectly.";
-    }
-
-    public void deleteUser(UserEntity user) {
-        userRepo.deleteUser(user);
-    }
-
-    public void logoutUser(UserEntity user) {
 
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = userRepo.findByUsername(username);
-        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().getRole());
-        return new User(
-                user.getUsername(),
-                user.getPassword(),
-                Collections.singleton(authority)
-        );
+    public List<UserAdminDto> getUsers() {
+        return UserMapper.mapAllUserForAdmin(userRepo.findAll());
+    }
+
+    public void banUser(Long id) {
+        userRepo.bannerUser(id, State.BANNED);
+    }
+
+    public void unbanUser(Long id) {
+        userRepo.bannerUser(id, State.ACTIVE);
+    }
+
+    public void deleteUser(String username) {
+        userRepo.deleteUser(userRepo.findByUsername(username));
     }
 }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DataExportManager">
@@ -27,8 +27,50 @@
     <show-object-properties value="true" />
     <loaded-nodes />
   </component>
+  <component name="DBNavigator.Project.DatabaseConsoleManager">
+    <connection id="92fe9865-f044-4a17-bfc1-2de022f413c7">
+      <console name="Connection" type="STANDARD" schema="information_schema" session="Main" />
+    </connection>
+    <connection id="2f00e3eb-74f8-4ac2-a7dd-506c6466dd2b">
+      <console name="Connection spring" type="STANDARD" schema="information_schema" session="Main" />
+    </connection>
+  </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
+  </component>
+  <component name="DBNavigator.Project.DatabaseSessionManager">
+    <connection id="92fe9865-f044-4a17-bfc1-2de022f413c7" />
+    <connection id="2f00e3eb-74f8-4ac2-a7dd-506c6466dd2b" />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="2f00e3eb-74f8-4ac2-a7dd-506c6466dd2b" dataset="public.user_recipe_project" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="2f00e3eb-74f8-4ac2-a7dd-506c6466dd2b" dataset="public.role_project" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="2f00e3eb-74f8-4ac2-a7dd-506c6466dd2b" dataset="public.recipes_category" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="2f00e3eb-74f8-4ac2-a7dd-506c6466dd2b" dataset="public.step_project" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="2f00e3eb-74f8-4ac2-a7dd-506c6466dd2b" dataset="public.category_project" active-filter-id="e3ea3a09-bd5e-4486-a39b-a1434bd91d67">
+      <filter id="e3ea3a09-bd5e-4486-a39b-a1434bd91d67" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
+    <filter-actions connection-id="2f00e3eb-74f8-4ac2-a7dd-506c6466dd2b" dataset="public.favorite_recipe_project" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="2f00e3eb-74f8-4ac2-a7dd-506c6466dd2b" dataset="public.ingredient_project" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="92fe9865-f044-4a17-bfc1-2de022f413c7" dataset="public.category_project_user_recipe_project" active-filter-id="aa6fed09-aef9-48e0-9b00-a185375638a1">
+      <filter id="aa6fed09-aef9-48e0-9b00-a185375638a1" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
+    <filter-actions connection-id="92fe9865-f044-4a17-bfc1-2de022f413c7" dataset="public.user_recipe_project" active-filter-id="69fa6b4a-0c15-497f-9660-3cdc8f951d01">
+      <filter id="69fa6b4a-0c15-497f-9660-3cdc8f951d01" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
+    <filter-actions connection-id="92fe9865-f044-4a17-bfc1-2de022f413c7" dataset="public.user_recipe_project_category_project" active-filter-id="e9662c99-52b6-4b73-af83-4a9af59dc80a">
+      <filter id="e9662c99-52b6-4b73-af83-4a9af59dc80a" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
+    <filter-actions connection-id="92fe9865-f044-4a17-bfc1-2de022f413c7" dataset="public.category_project" active-filter-id="2bb153c3-f0d2-4b8f-ad33-a8fff3a1bb0c">
+      <filter id="2bb153c3-f0d2-4b8f-ad33-a8fff3a1bb0c" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
+    <filter-actions connection-id="92fe9865-f044-4a17-bfc1-2de022f413c7" dataset="public.category" active-filter-id="9d0cb010-05e8-4e90-9dfb-06f39373302b">
+      <filter id="9d0cb010-05e8-4e90-9dfb-06f39373302b" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
+    <filter-actions connection-id="92fe9865-f044-4a17-bfc1-2de022f413c7" dataset="public.users_jpa" active-filter-id="" />
+    <filter-actions connection-id="92fe9865-f044-4a17-bfc1-2de022f413c7" dataset="public.users_project" active-filter-id="61b89563-4c40-408f-b1dd-4e9c24b2eda9">
+      <filter id="61b89563-4c40-408f-b1dd-4e9c24b2eda9" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -58,7 +100,176 @@
     <recently-used-interfaces />
   </component>
   <component name="DBNavigator.Project.Settings">
-    <connections />
+    <connections>
+      <connection id="92fe9865-f044-4a17-bfc1-2de022f413c7" active="true" signed="true">
+        <database>
+          <name value="Connection" />
+          <description value="" />
+          <database-type value="POSTGRES" />
+          <config-type value="BASIC" />
+          <database-version value="14.5" />
+          <driver-source value="BUILTIN" />
+          <driver-library value="" />
+          <driver value="" />
+          <url-type value="DATABASE" />
+          <host value="localhost" />
+          <port value="5432" />
+          <database value="postgres" />
+          <type value="USER_PASSWORD" />
+          <user value="postgres" />
+          <deprecated-pwd value="ZGFtaXIxOTEy" />
+        </database>
+        <properties>
+          <auto-commit value="false" />
+        </properties>
+        <ssh-settings>
+          <active value="false" />
+          <proxy-host value="" />
+          <proxy-port value="22" />
+          <proxy-user value="" />
+          <deprecated-proxy-pwd value="" />
+          <auth-type value="PASSWORD" />
+          <key-file value="" />
+          <key-passphrase value="" />
+        </ssh-settings>
+        <ssl-settings>
+          <active value="false" />
+          <certificate-authority-file value="" />
+          <client-certificate-file value="" />
+          <client-key-file value="" />
+        </ssl-settings>
+        <details>
+          <charset value="UTF-8" />
+          <session-management value="true" />
+          <ddl-file-binding value="true" />
+          <database-logging value="true" />
+          <connect-automatically value="true" />
+          <restore-workspace value="true" />
+          <restore-workspace-deep value="false" />
+          <environment-type value="default" />
+          <connectivity-timeout value="5" />
+          <idle-time-to-disconnect value="30" />
+          <idle-time-to-disconnect-pool value="5" />
+          <credential-expiry-time value="10" />
+          <max-connection-pool-size value="7" />
+          <alternative-statement-delimiter value="" />
+        </details>
+        <object-filters hide-empty-schemas="false" hide-pseudo-columns="false">
+          <object-type-filter>
+            <object-type name="SCHEMA" enabled="true" />
+            <object-type name="USER" enabled="true" />
+            <object-type name="ROLE" enabled="true" />
+            <object-type name="PRIVILEGE" enabled="true" />
+            <object-type name="CHARSET" enabled="true" />
+            <object-type name="TABLE" enabled="true" />
+            <object-type name="VIEW" enabled="true" />
+            <object-type name="MATERIALIZED_VIEW" enabled="true" />
+            <object-type name="NESTED_TABLE" enabled="true" />
+            <object-type name="COLUMN" enabled="true" />
+            <object-type name="INDEX" enabled="true" />
+            <object-type name="CONSTRAINT" enabled="true" />
+            <object-type name="DATASET_TRIGGER" enabled="true" />
+            <object-type name="DATABASE_TRIGGER" enabled="true" />
+            <object-type name="SYNONYM" enabled="true" />
+            <object-type name="SEQUENCE" enabled="true" />
+            <object-type name="PROCEDURE" enabled="true" />
+            <object-type name="FUNCTION" enabled="true" />
+            <object-type name="PACKAGE" enabled="true" />
+            <object-type name="TYPE" enabled="true" />
+            <object-type name="TYPE_ATTRIBUTE" enabled="true" />
+            <object-type name="ARGUMENT" enabled="true" />
+            <object-type name="DIMENSION" enabled="true" />
+            <object-type name="CLUSTER" enabled="true" />
+            <object-type name="DBLINK" enabled="true" />
+          </object-type-filter>
+          <object-name-filters />
+        </object-filters>
+      </connection>
+      <connection id="2f00e3eb-74f8-4ac2-a7dd-506c6466dd2b" active="true" signed="true">
+        <database>
+          <name value="Connection spring" />
+          <description value="" />
+          <database-type value="POSTGRES" />
+          <config-type value="BASIC" />
+          <database-version value="14.5" />
+          <driver-source value="BUILTIN" />
+          <driver-library value="" />
+          <driver value="" />
+          <url-type value="DATABASE" />
+          <host value="localhost" />
+          <port value="5432" />
+          <database value="dbspring" />
+          <type value="USER_PASSWORD" />
+          <user value="postgres" />
+          <deprecated-pwd value="ZGFtaXIxOTEy" />
+        </database>
+        <properties>
+          <auto-commit value="false" />
+        </properties>
+        <ssh-settings>
+          <active value="false" />
+          <proxy-host value="" />
+          <proxy-port value="22" />
+          <proxy-user value="" />
+          <deprecated-proxy-pwd value="" />
+          <auth-type value="PASSWORD" />
+          <key-file value="" />
+          <key-passphrase value="" />
+        </ssh-settings>
+        <ssl-settings>
+          <active value="false" />
+          <certificate-authority-file value="" />
+          <client-certificate-file value="" />
+          <client-key-file value="" />
+        </ssl-settings>
+        <details>
+          <charset value="UTF-8" />
+          <session-management value="true" />
+          <ddl-file-binding value="true" />
+          <database-logging value="true" />
+          <connect-automatically value="true" />
+          <restore-workspace value="true" />
+          <restore-workspace-deep value="false" />
+          <environment-type value="default" />
+          <connectivity-timeout value="5" />
+          <idle-time-to-disconnect value="30" />
+          <idle-time-to-disconnect-pool value="5" />
+          <credential-expiry-time value="10" />
+          <max-connection-pool-size value="7" />
+          <alternative-statement-delimiter value="" />
+        </details>
+        <object-filters hide-empty-schemas="false" hide-pseudo-columns="false">
+          <object-type-filter>
+            <object-type name="SCHEMA" enabled="true" />
+            <object-type name="USER" enabled="true" />
+            <object-type name="ROLE" enabled="true" />
+            <object-type name="PRIVILEGE" enabled="true" />
+            <object-type name="CHARSET" enabled="true" />
+            <object-type name="TABLE" enabled="true" />
+            <object-type name="VIEW" enabled="true" />
+            <object-type name="MATERIALIZED_VIEW" enabled="true" />
+            <object-type name="NESTED_TABLE" enabled="true" />
+            <object-type name="COLUMN" enabled="true" />
+            <object-type name="INDEX" enabled="true" />
+            <object-type name="CONSTRAINT" enabled="true" />
+            <object-type name="DATASET_TRIGGER" enabled="true" />
+            <object-type name="DATABASE_TRIGGER" enabled="true" />
+            <object-type name="SYNONYM" enabled="true" />
+            <object-type name="SEQUENCE" enabled="true" />
+            <object-type name="PROCEDURE" enabled="true" />
+            <object-type name="FUNCTION" enabled="true" />
+            <object-type name="PACKAGE" enabled="true" />
+            <object-type name="TYPE" enabled="true" />
+            <object-type name="TYPE_ATTRIBUTE" enabled="true" />
+            <object-type name="ARGUMENT" enabled="true" />
+            <object-type name="DIMENSION" enabled="true" />
+            <object-type name="CLUSTER" enabled="true" />
+            <object-type name="DBLINK" enabled="true" />
+          </object-type-filter>
+          <object-name-filters />
+        </object-filters>
+      </connection>
+    </connections>
     <browser-settings>
       <general>
         <display-mode value="TABBED" />

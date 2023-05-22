@@ -1,54 +1,62 @@
 package ru.kpfu.itis.config;
 
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
-import ru.kpfu.itis.service.UserService;
+import org.springframework.web.servlet.config.annotation.*;
+import ru.kpfu.itis.converter.LocalDateConverter;
+import ru.kpfu.itis.service.*;
 
+@EnableWebMvc
 @Configuration
 @ComponentScan("ru.kpfu.itis.controller")
-@EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter {
-
-    @Bean
-    public ViewResolver viewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/jsp/");
-        resolver.setSuffix(".jsp");
-        resolver.setViewClass(JstlView.class);
-        resolver.setRedirectContextRelative(false);
-        return resolver;
-    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/css/**").addResourceLocations("/assets/css/");
+        registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
+        registry.addResourceHandler("/img/**").addResourceLocations("classpath:/static/img/");
+        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/");
     }
 
     @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("sign-up");
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(localDateConverter());
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public LocalDateConverter localDateConverter(){
+        return new LocalDateConverter();
     }
 
     @Bean
-    public UserService userService(){
-        return new UserService();
+    public RecipeService recipeService() {
+        return new RecipeService();
     }
 
+    @Bean
+    public UserRecipeService userRecipeService() {
+        return new UserRecipeService(localDateConverter());
+    }
+
+    @Bean
+    public CategoryService categoryService() {
+        return new CategoryService();
+    }
+
+    @Bean
+    public FavoriteRecipeService favoriteRecipeService() {
+        return new FavoriteRecipeService();
+    }
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .components(new Components())
+                .info(new Info().title("Recipe API").version("v1"));
+    }
 }

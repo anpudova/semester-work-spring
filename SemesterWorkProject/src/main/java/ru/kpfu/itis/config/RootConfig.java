@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -17,9 +18,10 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("ru.kpfu.itis.repository.db")
+@ComponentScan("ru.kpfu.itis.repository.db.jpa")
 @EnableTransactionManagement
 @PropertySource("classpath:/application.properties")
+@EnableJpaRepositories("ru.kpfu.itis.repository.db.datajpa")
 public class RootConfig {
 
     private static final String ENTITIES_PACKAGE = "ru.kpfu.itis.model.entity.db";

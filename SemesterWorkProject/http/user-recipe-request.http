@@ -1,0 +1,92 @@
+# Список всех рецептов пользователей
+GET http://localhost:8082/app/api/v1/recipe
+Content-Type: application/json
+# Ожидаемый код состояния 200 OK
+
+###
+
+# Удаление рецепта по id
+DELETE http://localhost:8082/app/api/v1/recipe/777
+
+###
+
+# Вывод рецепта пользователя по id
+GET http://localhost:8082/app/api/v1/recipe/13
+# Ожидаемый код состояния 200 OK
+
+###
+
+#
+GET http://localhost:8082/app/api/v1/recipe/999
+# Ожидаемый код состояния 404 Not Found
+
+###
+
+GET http://localhost:8082/app/api/v1/admin
+Content-Type: application/json
+
+###
+
+
+PUT http://localhost:8082/app/api/v1/admin/add
+
+###
+
+# Пользователь забанен
+PUT http://localhost:8082/app/api/v1/admin/6/ban
+
+###
+
+# Пользователь разбанен
+PUT http://localhost:8082/app/api/v1/admin/6/unban
+
+###
+
+# Добавление рецепта в избранное
+POST http://localhost:8082/app/api/v1/favorite/toggle
+Content-Type: application/json
+
+{
+  "isFavorite": false,
+  "recipe": {
+    "id": "1",
+    "title": "Recipe Test",
+    "image": "image.jpg"
+  },
+  "id": "3"
+}
+
+### Ожидаемый ответ: Recipe added to favorites successfully.
+# Ожидаемый код состояния 200 OK
+
+###
+
+# Удаление рецепта из избранного
+POST http://localhost:8082/app/api/v1/favorite/toggle
+Content-Type: application/json
+
+{
+  "isFavorite": true,
+  "recipe": {
+    "id": "1",
+    "title": "Recipe Test",
+    "image": "image.jpg"
+  },
+  "id": "3"
+}
+
+### Ожидаемый ответ: Recipe successfully removed from favorites.
+# Ожидаемый код состояния 200 OK
+
+###
+
+# Проверка есть ли рецепт в избранном у пользователя
+GET http://localhost:8082/app/api/v1/favorite/isFavorite?recipeId=111&userId=3
+# Ожидаемый ответ: false
+# Ожидаемый код состояния 200 OK
+
+###
+
+GET http://localhost:8082/app/api/v1/favorite/isFavorite?recipeId=659015&userId=3
+# Ожидаемый ответ: true
+# Ожидаемый код состояния 200 OK

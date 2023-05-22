@@ -1,0 +1,21 @@
+# Используйте базовый образ PostgreSQL
+FROM postgres:latest
+
+# Установите переменные среды для настройки СУБД (если требуется)
+ENV db.url=jdbc:postgresql://localhost:5432/postgres
+ENV db.user=postgres
+ENV db.password=damir1912
+ENV db.driver=org.postgresql.Driver
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=damir1912
+ENV POSTGRES_DB=postgres
+ENV hibernate.dialect=org.hibernate.dialect.PostgreSQL95Dialect
+ENV hibernate.show_sql=true
+ENV hibernate.hbm2ddl.auto=update
+ENV hibernate.enable_lazy_load_no_trans=true
+
+# Укажите порт, на котором будет работать сервер СУБД
+EXPOSE 5432
+
+# Запустите сервер СУБД при запуске контейнера
+CMD ["postgres"]

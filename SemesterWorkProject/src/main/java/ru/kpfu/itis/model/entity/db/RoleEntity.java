@@ -1,12 +1,14 @@
 package ru.kpfu.itis.model.entity.db;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "role_project")
-public class RoleEntity implements Serializable {
+public class RoleEntity implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +16,7 @@ public class RoleEntity implements Serializable {
 
     @NotNull
     @Column(name = "role", length = 20, unique = true)
-    private String role;
+    private String authority;
 
     public Long getId() {
         return id;
@@ -24,11 +26,12 @@ public class RoleEntity implements Serializable {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    @Override
+    public String getAuthority() {
+        return authority;
     }
 }
